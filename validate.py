@@ -26,5 +26,13 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
     return True
 
 
-def _validate_coordinate(co_ordinate):
+def _validate_coordinate(coordinate):
     pass
+
+if __name__ == "__main__":
+
+    chess_board = {"A2": "P_W"}
+
+    print(validate_move(chess_board, "A2", "A3"))
+    print("===="*30)
+    print(validate_move(chess_board, "H9", "cheese"))

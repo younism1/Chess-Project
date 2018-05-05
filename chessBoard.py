@@ -1,13 +1,11 @@
 import validate
+import undo_move
 
-#CREATING A DICTIONARY FOR CHESS BOARD.
-chess_board = {}
+#Generates the board and populate it with pieces.
+def generate_board():
+    global chess_board
+    chess_board = {"A1": "C_W", "B1": "H_W"}
 
-#CREATING A FUNCTION TO POPULATE CHESS BOARD.
-def populate_board():
-
-    chess_board["A1"] = "C_W"
-    chess_board["B1"] = "H_W"
     chess_board["C1"] = "B_W"
     chess_board["D1"] = "Q_W"
     chess_board["E1"] = "K_W"
@@ -41,8 +39,6 @@ def populate_board():
     chess_board["F8"] = "B_B"
     chess_board["G8"] = "H_B"
     chess_board["H8"] = "C_B"
-
-populate_board()
 
 #CREATING A FUNCTION TO PRINT THE CHESS BOARD ON CONSOLE,
 #SO IT MAKES SENSE TO HUMAN.
@@ -85,34 +81,48 @@ def print_board():
 #     #CALLING FUNCTION WITHIN FUNCTION AT THE END TO LOOP.
 #     #move_piece()
 
-def move_piece_new(from_coordinates, to_coordinates):
+def process_command(command_input):
+    if command_input == "quit":
+        quit()
+    if command_input == "undo":
+        undo_move.undo_last_move(chess_board)
+        return False
+    return True
 
-    piece =  chess_board[from_coordinates]
+
+
+
+
+#taking from coordiantes and moving piece to the to cooridantes
+def move_piece(from_coordinates, to_coordinates):
+    global chess_board
+    piece =  chess_board.get(to_coordinates)
     chess_board[to_coordinates] = chess_board[from_coordinates]
     print(chess_board[from_coordinates])
     del chess_board[from_coordinates]
+    undo_move.store_move(from_coordinates,to_coordinates,piece)
 
-
+#imports validation at the top and validates
 def validate_and_move_piece(from_coordiantes, to_coordinates):
+    """imports validation at the top and validates """
     #validate
     if validate.validate_move(chess_board, from_coordiantes, to_coordinates):
-        move_piece_new(from_coordiantes, to_coordinates)
+        move_piece(from_coordiantes, to_coordinates)
     else:
         print("WHAT ARE YOU DOING?? \n TRY AGAIN! \n FAILED VALIDATION")
     #if it's valid move the piece
 
 # move_piece_new()
 # validate_and_move_piece()
+generate_board()
 print_board()
 
 while True:
     from_coordinates = input("from:  ")
-    print("You're moving:", chess_board.get(from_coordinates))
-    to_coordinates = input("to:  ")
+    if process_command(from_coordinates):
+        print("You're moving:", chess_board.get(from_coordinates))
+        to_coordinates = input("to:  ")
 
-    validate_and_move_piece(from_coordinates, to_coordinates)
-    #move_piece_new(from_coordinates, to_coordinates)
+        validate_and_move_piece(from_coordinates, to_coordinates)
+        #move_piece_new(from_coordinates, to_coordinates)
     print_board()
-
-    if from_coordinates == "quit":
-        break
