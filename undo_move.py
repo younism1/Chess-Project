@@ -1,19 +1,18 @@
-undo_moves = []
+_undo_moves = []
 
 def store_move(from_coordinates, to_coordinates, undo_piece):
-    undo_moves.append((from_coordinates, to_coordinates, undo_piece))
+    _undo_moves.append((from_coordinates, to_coordinates, undo_piece))
 
     to_coordinates = from_coordinates
 
 def undo_last_move(chess_board):
-    from_coordinates, to_coordinates, undo_piece = undo_moves.pop()
+    from_coordinates, to_coordinates, undo_piece = _undo_moves.pop()
     chess_board[from_coordinates] = chess_board[to_coordinates]
     chess_board[to_coordinates] = undo_piece
 
 
 
 if __name__ == "__main__":
-
 
     test_chess_board = {"H3": "K_B"}
 
@@ -34,13 +33,13 @@ if __name__ == "__main__":
 
 
     store_move("H2", "H3", "P_W")
-    print(undo_moves)
+    print(_undo_moves)
 
     test_chess_board = {"H3": "K_B"}
     print_board()
 
     undo_last_move(test_chess_board)
     print(test_chess_board)
-    print(undo_moves)
+    print(_undo_moves)
 
     print_board()

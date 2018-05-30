@@ -1,4 +1,4 @@
-import validate
+from validate import validate_move
 import undo_move
 
 #Generates the board and populate it with pieces.
@@ -57,30 +57,6 @@ def print_board():
 
         print(row)
 
-# print_board()
-
-# CREATING A FUNCTION TO MOVE THE CHESS PIECES ON THE BOARD.
-# def move_piece_old():
-#     global chess_board
-#
-#     #TAKES "INPUT" FOR FROM COORDINATES.
-#     from_coordinates = input("From: ")
-#
-#     #DEFINED THE VALUE FOR FROM COORDINATES.
-#     from_coordinates_value = chess_board[from_coordinates]
-#     print("You're moving:",from_coordinates_value)
-#
-#     #TAKES "INPUT" FOR TO COORDINATES AND REPLACES VALUE WITH FROM COORDINATES VALUE.
-#     to_coordinates = input("To: ")
-#     chess_board[to_coordinates] = from_coordinates_value
-#
-#     #DELETE FROM_COORDINATES VALUE.
-#     del chess_board[from_coordinates]
-#     print_board()
-#
-#     #CALLING FUNCTION WITHIN FUNCTION AT THE END TO LOOP.
-#     #move_piece()
-
 def process_command(command_input):
     if command_input == "quit":
         quit()
@@ -88,10 +64,6 @@ def process_command(command_input):
         undo_move.undo_last_move(chess_board)
         return False
     return True
-
-
-
-
 
 #taking from coordiantes and moving piece to the to cooridantes
 def move_piece(from_coordinates, to_coordinates):
@@ -106,14 +78,12 @@ def move_piece(from_coordinates, to_coordinates):
 def validate_and_move_piece(from_coordiantes, to_coordinates):
     """imports validation at the top and validates """
     #validate
-    if validate.validate_move(chess_board, from_coordiantes, to_coordinates):
+    if validate_move(chess_board, from_coordiantes, to_coordinates):
         move_piece(from_coordiantes, to_coordinates)
     else:
         print("WHAT ARE YOU DOING?? \n TRY AGAIN! \n FAILED VALIDATION")
     #if it's valid move the piece
 
-# move_piece_new()
-# validate_and_move_piece()
 generate_board()
 print_board()
 
