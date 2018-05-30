@@ -10,4 +10,4 @@ git commit
   "esc" to go into command mode
   ":wq" to save and quit the editor
  
-git push
+git push 
