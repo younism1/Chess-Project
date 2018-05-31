@@ -3,6 +3,7 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
         return False
 
     if not _validate_coordinate(to_coordinate):
+        print("failed at 6")
         return False
 
     from_piece = chess_board.get(from_coordinate)
@@ -17,7 +18,7 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
             return False
 
     if from_piece[0] == "K":
-        return _validate_king_move(from_piece,chess_board, from_coordinate, to_coordinate)
+        return _validate_king_move(chess_board, from_coordinate, to_coordinate)
 
     return True
 
@@ -35,9 +36,12 @@ def _validate_coordinate(coordinate):
         return False
     return True
 
+def coordinate_to_numbers(coordinate):
+    return -1
+
 # def _validate_king_move(from_coordinate, to_coordinate):
 
-def _validate_king_move(from_piece, chess_board, from_coordinates, to_coordinates):
+def _validate_king_move(chess_board, from_coordinates, to_coordinates):
     """"validate the from_coordinates is within  one of the to_coordinates"""
 
     from_row = int(from_coordinates[1])
@@ -45,6 +49,14 @@ def _validate_king_move(from_piece, chess_board, from_coordinates, to_coordinate
 
     if not (to_row -1 <= from_row <= to_row +1):
         return False
+
+    column = "ABCDEFGH"
+    from_column = column.index(from_coordinates[0])
+    to_column = column.index(to_coordinates[0])
+
+    if not (to_column -1 <= from_column <= to_column +1):
+        return False
+
 
     # from_column = int(from_coordinates[0])
     # to_column = int(to_coordinates[0])
@@ -57,7 +69,8 @@ def _validate_king_move(from_piece, chess_board, from_coordinates, to_coordinate
     return True
 
 if __name__ == "__main__":
-    chess_board = {"A2": "P_W"}
+    chess_board = {"A2": "P_W",
+                   "C3": "K_W"}
     print("A2", validate_move(chess_board, "A2", "A3"))
     print("====" * 30)
     print(validate_move(chess_board, "H9", "cheese"))
@@ -66,6 +79,19 @@ if __name__ == "__main__":
     print("====" * 30)
 
     chess_board["C3"] = "K_W"
-    print("True validate king", _validate_king_move("K_W", chess_board, "C3", "D4"))
-    print("False validate king", _validate_king_move("K_W", chess_board, "C3", "D7"))
-    print("False validate king", _validate_king_move("K_W", chess_board, "C3", "H3"))
+    print("True validate king", _validate_king_move(chess_board, "C3", "D4"))
+    print("False validate king", _validate_king_move(chess_board, "C3", "D7"))
+    print("False validate king", _validate_king_move(chess_board, "C3", "H3"))
+    print("====" * 30)
+
+    print("True validate move king", validate_move(chess_board, "C3", "D4"))
+    print("False validate move king", validate_move(chess_board, "C3", "D7"))
+    print("False validate move king", validate_move(chess_board, "C3", "H3"))
+
+    print("====" * 30)
+    print("Validate C is 3", coordinate_to_numbers("C3"))
+    print("Validate H is 7", coordinate_to_numbers("H3"))
+
+
+
+
