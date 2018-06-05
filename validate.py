@@ -10,20 +10,23 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
     if from_piece == None:
         print("Are you blind! there's nothing here")
         return False
-    # x = chess_board.get(to_coordinate)[2]
-    # print(x)
 
     if chess_board.get(to_coordinate) != None:
         if from_piece[2] == chess_board.get(to_coordinate)[2]:
             return False
 
+    from_column_number = coordinate_to_column_number(from_coordinate)
+    to_column_number = coordinate_to_column_number(to_coordinate)
+
     if from_piece[0] == "K":
-        return _validate_king_move(chess_board, from_coordinate, to_coordinate)
+        return _validate_king_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
+
+    elif from_piece[0] == "P":
+        return _validate_pawn_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
 
     return True
 
 """add the validation for cooridantes and make sure it runs without a pass, test below"""
-
 
 def _validate_coordinate(coordinate):
     if not coordinate[0] in "ABCDEFGH":
@@ -36,12 +39,12 @@ def _validate_coordinate(coordinate):
         return False
     return True
 
-def coordinate_to_numbers(coordinate):
-    return -1
+def coordinate_to_column_number(coordinate):
+    column = "ABCDEFGH"
+    column_coordinate = column.index(coordinate[0])
+    return  column_coordinate
 
-# def _validate_king_move(from_coordinate, to_coordinate):
-
-def _validate_king_move(chess_board, from_coordinates, to_coordinates):
+def _validate_king_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
     """"validate the from_coordinates is within  one of the to_coordinates"""
 
     from_row = int(from_coordinates[1])
@@ -50,48 +53,31 @@ def _validate_king_move(chess_board, from_coordinates, to_coordinates):
     if not (to_row -1 <= from_row <= to_row +1):
         return False
 
-    column = "ABCDEFGH"
-    from_column = column.index(from_coordinates[0])
-    to_column = column.index(to_coordinates[0])
-
-    if not (to_column -1 <= from_column <= to_column +1):
+    if not (to_column_number -1 <= from_column_number <= to_column_number +1):
         return False
 
-
-    # from_column = int(from_coordinates[0])
-    # to_column = int(to_coordinates[0])
-
-#    from_column = "ABCDEFGH"
-
-#     if not from_coordinates[1]
-#     nd to_coordinates[1]
-#
     return True
 
-if __name__ == "__main__":
-    chess_board = {"A2": "P_W",
-                   "C3": "K_W"}
-    print("A2", validate_move(chess_board, "A2", "A3"))
-    print("====" * 30)
-    print(validate_move(chess_board, "H9", "cheese"))
-    print("====" * 30)
-    print(validate_move(chess_board, "E1", "E3"))
-    print("====" * 30)
 
-    chess_board["C3"] = "K_W"
-    print("True validate king", _validate_king_move(chess_board, "C3", "D4"))
-    print("False validate king", _validate_king_move(chess_board, "C3", "D7"))
-    print("False validate king", _validate_king_move(chess_board, "C3", "H3"))
-    print("====" * 30)
+def _validate_pawn_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
 
-    print("True validate move king", validate_move(chess_board, "C3", "D4"))
-    print("False validate move king", validate_move(chess_board, "C3", "D7"))
-    print("False validate move king", validate_move(chess_board, "C3", "H3"))
+    from_piece_colour = chess_board.get(from_coordinates)[2]
+    if from_piece_colour == "B":
+        direction = -1
+    else:
+        direction = +1
 
-    print("====" * 30)
-    print("Validate C is 3", coordinate_to_numbers("C3"))
-    print("Validate H is 7", coordinate_to_numbers("H3"))
+    from_row = int(from_coordinates[1])
+    to_row =int(to_coordinates[1])
+
+    if chess_board.get(to_coordinates) is None:
+        if not from_column_number == to_column_number:
+            return False
 
 
-
+"""adding things here to validate the last line in test Validate"""
+    #     if to_row != from_row + direction:
+    #         return False
+    #
+    # return True
 
