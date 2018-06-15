@@ -88,10 +88,10 @@ generate_board()
 print_board()
 
 while True:
-    from_coordinates = input("from:  ")
+    from_coordinates = input("from:  ").strip(" ").upper()
     if process_command(from_coordinates):
         print("You're moving:", chess_board.get(from_coordinates))
-        to_coordinates = input("to:  ")
+        to_coordinates = input("to:  ").strip(" ").upper()
 
         validate_and_move_piece(from_coordinates, to_coordinates)
         #move_piece_new(from_coordinates, to_coordinates)
