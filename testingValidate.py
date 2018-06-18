@@ -1,6 +1,8 @@
 import validate
 import specialMove
 
+
+
 if __name__ == "__main__":
     chess_board = {"A2": "P_W",
                    "C3": "K_W",
@@ -36,5 +38,5 @@ if __name__ == "__main__":
     print("True validate move king C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
 
     # print("====" * 30)
-    print("Validate en_passant A2 to A4 is True", validate.special(chess_board,"A8","A5"))
+    print("Validate en_passant A2 to A4 is True", specialMove.en_passant(chess_board,"A8","A5"))
     # print("Validate A8 to B5 is False", validate._validate_rock_move(chess_board, "A8", "B5",))
