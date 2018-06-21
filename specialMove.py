@@ -9,7 +9,7 @@ def special_move(chess_board, from_coordinates, to_coordinates, undo_move):
         to_row = int(to_coordinates[1])
         from_row = int(from_coordinates[1])
 
-        print(chess_board.get(from_coordinates)[0], " and ", to_coordinates == en_passant)
+        #print(chess_board.get(from_coordinates)[0], " and ", to_coordinates == en_passant)
         if chess_board.get(from_coordinates)[0] == "P" and to_coordinates == en_passant:
             piece = chess_board.get(to_coordinates)
             chess_board[to_coordinates] = chess_board[from_coordinates]

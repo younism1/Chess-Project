@@ -5,11 +5,34 @@ import specialMove
 
 if __name__ == "__main__":
     chess_board = {"A2": "P_W",
+                   "B4": "P_B",
+                   "H7": "P_B",
+                   "G5": "P_W",
                    "C3": "K_W",
                    "F8":"K_B",
                    "C7": "P_B",
-                   "A8": "C_B"}
+                   "A8": "C_B",
+                   "A6": "C_B",
+                   "B6": "C_W"}
 
+    print("====" * 30+"Special move")
+    print("Validate en_passant A2 to A4 is False", specialMove.special_move(chess_board,"A2","A4", tuple()))
+    print(specialMove.en_passant)
+    chess_board["A4"] = chess_board["A2"]
+    del chess_board["A2"]
+    print("Validate en_passant B4 to A3 is True", specialMove.special_move(chess_board,"B4","A3", tuple()))
+    print(chess_board)
+
+    print()
+    print("Validate en_passant BLACK! H7 to H5 is False", specialMove.special_move(chess_board,"H7","H5", tuple()))
+    print(specialMove.en_passant)
+    chess_board["H5"] = chess_board["H7"]
+    del chess_board["H7"]
+    print("Validate en_passant BLACK! G5 to H6 is True", specialMove.special_move(chess_board,"G5","H6", tuple()))
+    print(chess_board)
+
+
+    print("====" * 30+"validate")
     print("A2", validate.validate_move(chess_board, "A2", "A3"))
     print("====" * 30)
     print(validate.validate_move(chess_board, "H9", "cheese"))
@@ -37,6 +60,14 @@ if __name__ == "__main__":
     print("True validate move king C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
     print("True validate move king C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
 
-    # print("====" * 30)
-    print("Validate en_passant A2 to A4 is True", specialMove.en_passant(chess_board,"A8","A5"))
-    # print("Validate A8 to B5 is False", validate._validate_rock_move(chess_board, "A8", "B5",))
+    print("_validate_rock_move A8 to B3 False", validate._validate_rook_move(chess_board, "A8", "B3", 0, 1))
+    print("_validate_rock_move A8 to A3 True", validate._validate_rook_move(chess_board, "A8", "A3", 0, 0))
+    print("_validate_rock_move A8 to C8 True", validate._validate_rook_move(chess_board, "A8", "C8", 0, 2))
+    print("====" * 30)
+    print("_validate_rock_move A8 to A5 False", validate._validate_rook_move(chess_board, "A8", "A5", 0, 0))
+    print("====" * 30)
+    print("_validate_rock_move A6 to E6 False", validate._validate_rook_move(chess_board, "A6", "E6", 0, 4))
+
+
+
+    # print("Validate A8 to B5 is False", validate._validate_rock_move(chess_board, "A8", "B5"))

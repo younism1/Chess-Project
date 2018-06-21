@@ -58,9 +58,9 @@ def print_board():
         print(row)
 
 def process_command(command_input):
-    if command_input == "quit":
+    if command_input == "QUIT":
         quit()
-    if command_input == "undo":
+    if command_input == "UNDO":
         undo_move.undo_last_move(chess_board)
         return False
     return True

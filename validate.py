@@ -91,20 +91,43 @@ def _validate_pawn_move(chess_board, from_coordinates, to_coordinates, from_colu
             return False
     return True
 
-# def _validate_rock_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
-#
-#     from_piece_colour = chess_board.get(from_coordinates)[2]
-#     if from_piece_colour == "B":
-#         direction = range(1,8)
-#     else:
-#         direction = range(1,8)
-#
-#     from_row = int(from_coordinates[1])
-#     to_row = int(to_coordinates[1])
-#
-#     if chess_board.get(to_coordinates)is None:
-#         if not from_column_number == to_column_number:
-#             return False
-#
-#         if not to_row == from_row + direction:
-#             return False
+def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
+
+    from_piece_colour = chess_board.get(from_coordinates)[2]
+
+    from_row = int(from_coordinates[1])
+    to_row = int(to_coordinates[1])
+
+    # if chess_board.get(to_coordinates) is None:
+
+    if not (from_column_number == to_column_number or from_row == to_row):
+
+        #        and chess_board.get(to_coordinates) != None or :
+
+        return False
+
+    return True
+
+
+    # from_column_number = chess_board.get(from_coordinates[0] == int(from_coordinates[0]))
+    # to_column_number = chess_board.get(to_coordinates[0] == int(to_coordinates[0]))
+    #
+    # if not to_coordinates == None \
+    #         and from_column_number == to_column_number or from_coordinates[1] == to_coordinates[1]:
+    #         return False
+
+    # from_piece_colour = chess_board.get(from_coordinates)[2]
+    # if from_piece_colour == "B":
+    #     direction = range(1,8)
+    # else:
+    #     direction = range(1,8)
+    #
+    # from_row = int(from_coordinates[1])
+    # to_row = int(to_coordinates[1])
+    #
+    # if chess_board.get(to_coordinates)is None:
+    #     if not from_column_number == to_column_number:
+    #         return False
+    #
+    #     if not to_row == from_row + direction:
+    #         return False
