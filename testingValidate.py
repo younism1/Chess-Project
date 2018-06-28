@@ -13,7 +13,8 @@ if __name__ == "__main__":
                    "C7": "P_B",
                    "A8": "C_B",
                    "A6": "C_B",
-                   "B6": "C_W"}
+                   "B6": "C_W",
+                   "A7": "P_W"}
 
     print("====" * 30+"Special move")
     print("Validate en_passant A2 to A4 is False", specialMove.special_move(chess_board,"A2","A4", tuple()))
@@ -67,6 +68,10 @@ if __name__ == "__main__":
     print("_validate_rock_move A8 to A5 False", validate._validate_rook_move(chess_board, "A8", "A5", 0, 0))
     print("====" * 30)
     print("_validate_rock_move A6 to E6 False", validate._validate_rook_move(chess_board, "A6", "E6", 0, 4))
+
+    print("==== HOME WORK " * 30)
+    print("_validate_rock_move A6 to B6 True", validate._validate_rook_move(chess_board, "A6", "B6", 0, 1))
+    print("_validate_rock_move A8 to A5 False", validate._validate_rook_move(chess_board, "A8", "A6", 0, 0))
 
 
 

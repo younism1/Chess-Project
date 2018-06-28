@@ -1,5 +1,5 @@
 from validate import validate_move
-import undo_move
+import undo_moves
 
 #Generates the board and populate it with pieces.
 def generate_board():
@@ -61,7 +61,7 @@ def process_command(command_input):
     if command_input == "QUIT":
         quit()
     if command_input == "UNDO":
-        undo_move.undo_last_move(chess_board)
+        undo_moves.undo_last_move(chess_board)
         return False
     return True
 
@@ -72,7 +72,7 @@ def move_piece(from_coordinates, to_coordinates):
     chess_board[to_coordinates] = chess_board[from_coordinates]
     print(chess_board[from_coordinates])
     del chess_board[from_coordinates]
-    undo_move.store_move(from_coordinates,to_coordinates,piece)
+    undo_moves.store_move(from_coordinates, to_coordinates, piece)
 
 #imports validation at the top and validates
 def validate_and_move_piece(from_coordiantes, to_coordinates):

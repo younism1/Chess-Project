@@ -92,22 +92,54 @@ def _validate_pawn_move(chess_board, from_coordinates, to_coordinates, from_colu
     return True
 
 def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
-
     from_piece_colour = chess_board.get(from_coordinates)[2]
-
     from_row = int(from_coordinates[1])
     to_row = int(to_coordinates[1])
-
     # if chess_board.get(to_coordinates) is None:
-
     if not (from_column_number == to_column_number or from_row == to_row):
-
         #        and chess_board.get(to_coordinates) != None or :
-
         return False
 
+    if not from_row == to_row:
+        if from_row >= to_row:
+            x = range(to_row+1, from_row)
+        else:
+            x = range(from_row+1, to_row)
+
+        for i in x:
+            test_coordiante = from_coordinates[0]+ str(i)
+            if chess_board.get(test_coordiante) != None:
+                return False
+
+    else:
+        if from_column_number >= to_column_number:
+            y = range(to_column_number + 1, from_column_number)
+        else:
+            y = range(from_column_number + 1, to_column_number)
+
+        for i in y:
+            test_coordiante = "ABCDEFGH"[i] + from_coordinates[1]
+            if chess_board.get(test_coordiante) != None:
+                return False
+
+    # print("x",x)
+    # y = range(from_column_number, to_column_number)
+    # print("y",y)
+    # from_coordinates = from_column_number and from_row
+    # print("from coord",from_coordinates)
+    # to_coordinates = to_column_number and to_row
+    # print("to coord",to_coordinates)
+    #
+    # if from_column_number == to_column_number:
+    #     x +
+    #     return False
     return True
 
+    # if not from_row == to_row:
+    #
+    #
+    # if not to_column_number == from_column_number:
+    #     return False
 
     # from_column_number = chess_board.get(from_coordinates[0] == int(from_coordinates[0]))
     # to_column_number = chess_board.get(to_coordinates[0] == int(to_coordinates[0]))
