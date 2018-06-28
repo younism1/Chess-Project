@@ -1,7 +1,6 @@
 
 en_passant = None
 
-
 def special_move(chess_board, from_coordinates, to_coordinates, undo_moves):
     global en_passant
 

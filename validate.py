@@ -26,9 +26,10 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
     elif from_piece[0] == "P":
         return _validate_pawn_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
 
+    elif from_piece[0] == "C":
+        return _validate_rook_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
+
     return True
-
-
 """add the validation for cooridantes and make sure it runs without a pass, test below"""
 def _validate_coordinate(coordinate):
     if not coordinate[0] in "ABCDEFGH":
@@ -41,12 +42,10 @@ def _validate_coordinate(coordinate):
         return False
     return True
 
-
 def coordinate_to_column_number(coordinate):
     column = "ABCDEFGH"
     column_coordinate = column.index(coordinate[0])
     return  column_coordinate
-
 
 def _validate_king_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
     """"validate the from_coordinates is within  one of the to_coordinates"""
@@ -60,7 +59,6 @@ def _validate_king_move(chess_board, from_coordinates, to_coordinates, from_colu
         return False
 
     return True
-
 
 def _validate_pawn_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
 
@@ -163,3 +161,4 @@ def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_colu
     #
     #     if not to_row == from_row + direction:
     #         return False
+

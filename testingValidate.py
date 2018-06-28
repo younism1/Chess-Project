@@ -71,8 +71,12 @@ if __name__ == "__main__":
 
     print("==== HOME WORK " * 30)
     print("_validate_rock_move A6 to B6 True", validate._validate_rook_move(chess_board, "A6", "B6", 0, 1))
-    print("_validate_rock_move A8 to A5 False", validate._validate_rook_move(chess_board, "A8", "A6", 0, 0))
+    print("_validate_rock_move A8 to A6 False", validate._validate_rook_move(chess_board, "A8", "A6", 0, 0))
+    print("==== " * 30)
 
+    print("validate move with rook validation False", validate.validate_move(chess_board, "A8", "A6"))
 
-
+    print("_validate_rock_move A8 to C8 True", validate.validate_move(chess_board, "A8", "C8"))
+    print("_validate_rock_move A8 to A5 False", validate.validate_move(chess_board, "A8", "A5"))
+    print("_validate_rock_move A6 to E6 False", validate.validate_move(chess_board, "A6", "E6"))
     # print("Validate A8 to B5 is False", validate._validate_rock_move(chess_board, "A8", "B5"))
