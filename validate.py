@@ -93,9 +93,7 @@ def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_colu
     from_piece_colour = chess_board.get(from_coordinates)[2]
     from_row = int(from_coordinates[1])
     to_row = int(to_coordinates[1])
-    # if chess_board.get(to_coordinates) is None:
     if not (from_column_number == to_column_number or from_row == to_row):
-        #        and chess_board.get(to_coordinates) != None or :
         return False
 
     if not from_row == to_row:

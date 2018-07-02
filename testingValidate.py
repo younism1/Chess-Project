@@ -70,6 +70,7 @@ if __name__ == "__main__":
     print("_validate_rock_move A6 to E6 False", validate._validate_rook_move(chess_board, "A6", "E6", 0, 4))
 
     print("==== HOME WORK " * 30)
+    del chess_board["A7"]
     print("_validate_rock_move A6 to B6 True", validate._validate_rook_move(chess_board, "A6", "B6", 0, 1))
     print("_validate_rock_move A8 to A6 False", validate._validate_rook_move(chess_board, "A8", "A6", 0, 0))
     print("==== " * 30)
