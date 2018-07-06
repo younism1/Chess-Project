@@ -1,5 +1,6 @@
-from validate import validate_move
+from validate import validate_move, ValidationException
 import undo_moves
+from specialMove import special_move
 
 #Generates the board and populate it with pieces.
 def generate_board():
@@ -60,6 +61,7 @@ def print_board():
 def process_command(command_input):
     if command_input == "QUIT":
         quit()
+
     if command_input == "UNDO":
         undo_moves.undo_last_move(chess_board)
         return False
@@ -78,11 +80,18 @@ def move_piece(from_coordinates, to_coordinates):
 def validate_and_move_piece(from_coordiantes, to_coordinates):
     """imports validation at the top and validates """
     #validate
-    if validate_move(chess_board, from_coordiantes, to_coordinates):
-        move_piece(from_coordiantes, to_coordinates)
-    else:
-        print("WHAT ARE YOU DOING?? \n TRY AGAIN! \n FAILED VALIDATION")
-    #if it's valid move the piece
+    try:
+        if special_move(chess_board, from_coordinates, to_coordinates):
+            pass
+
+        elif validate_move(chess_board, from_coordiantes, to_coordinates):
+            move_piece(from_coordiantes, to_coordinates)
+        else:
+            print("WHAT ARE YOU DOING?? \n TRY AGAIN! \n FAILED VALIDATION")
+        #if it's valid move the piece
+
+    except ValidationException as e:
+        print(e)
 
 generate_board()
 print_board()

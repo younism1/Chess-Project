@@ -2,9 +2,10 @@ undo_moves = []
 
 def store_move(from_coordinates, to_coordinates, undo_piece):
     undo_moves.append([(from_coordinates, to_coordinates, undo_piece)])
-    to_coordinates = from_coordinates
+    # to_coordinates = from_coordinates
 
-def store_multi_move #new function to store multi moves
+def store_multi_move(from_coordinate, to_coordiante, undo_piece, from_coordinate_2, to_coordiante_2, undo_piece2):
+    undo_moves.append([(from_coordinate, to_coordiante, undo_piece), (from_coordinate_2, to_coordiante_2, undo_piece2)])
 
 def undo_last_move(chess_board):
     sub_moves = undo_moves.pop()

@@ -1,7 +1,6 @@
 import validate
 import specialMove
-
-
+import undo_moves
 
 if __name__ == "__main__":
     chess_board = {"A2": "P_W",
@@ -17,21 +16,27 @@ if __name__ == "__main__":
                    "A7": "P_W"}
 
     print("====" * 30+"Special move")
-    print("Validate en_passant A2 to A4 is False", specialMove.special_move(chess_board,"A2","A4", tuple()))
+    print("Validate en_passant A2 to A4 is False", specialMove.special_move(chess_board,"A2","A4"))
     print(specialMove.en_passant)
     chess_board["A4"] = chess_board["A2"]
     del chess_board["A2"]
-    print("Validate en_passant B4 to A3 is True", specialMove.special_move(chess_board,"B4","A3", tuple()))
+    print("Validate en_passant B4 to A3 is True", specialMove.special_move(chess_board,"B4","A3"))
     print(chess_board)
 
     print()
-    print("Validate en_passant BLACK! H7 to H5 is False", specialMove.special_move(chess_board,"H7","H5", tuple()))
+    print("Validate en_passant BLACK! H7 to H5 is False", specialMove.special_move(chess_board,"H7","H5"))
     print(specialMove.en_passant)
     chess_board["H5"] = chess_board["H7"]
     del chess_board["H7"]
-    print("Validate en_passant BLACK! G5 to H6 is True", specialMove.special_move(chess_board,"G5","H6", tuple()))
+    print("Validate en_passant BLACK! G5 to H6 is True", specialMove.special_move(chess_board,"G5","H6"))
     print(chess_board)
+    print("====" * 30)
+    print(undo_moves.undo_moves)
+    undo_moves.undo_last_move(chess_board)
+    print(chess_board)
+    print(undo_moves.undo_moves)
 
+    print("====" * 30)
 
     print("====" * 30+"validate")
     print("A2", validate.validate_move(chess_board, "A2", "A3"))
@@ -81,3 +86,5 @@ if __name__ == "__main__":
     print("_validate_rock_move A8 to A5 False", validate.validate_move(chess_board, "A8", "A5"))
     print("_validate_rock_move A6 to E6 False", validate.validate_move(chess_board, "A6", "E6"))
     # print("Validate A8 to B5 is False", validate._validate_rock_move(chess_board, "A8", "B5"))
+    print("==== " * 30)
+    print("Validate SPECAIL MOVE BLACK! G5 to H6 is True", specialMove.special_move(chess_board, "G5", "H6"))
