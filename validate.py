@@ -1,9 +1,5 @@
-
-
 def validate_move(chess_board, from_coordinate, to_coordinate):
-
     """white piece moves first - can work this out by having """
-
     if not _validate_coordinate(from_coordinate):
         return False
 
@@ -31,6 +27,12 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
 
     elif from_piece[0] == "C":
         return _validate_rook_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
+
+    elif from_piece[0] == "B":
+        return _validate_bishop_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
+
+    elif from_piece[0] == "Q":
+        return _validate_queen_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
 
     return True
 """add the validation for cooridantes and make sure it runs without a pass, test below"""
@@ -78,26 +80,25 @@ def _validate_pawn_move(chess_board, from_coordinates, to_coordinates, from_colu
 
     if chess_board.get(to_coordinates) is None:
         if not from_column_number == to_column_number:
+            return False
 
             """if to_co-ordinate is diagonally forward from from position"""
         # direction = from_column_number
-        if ((from_column_number == to_column_number +1 or from_column_number == to_column_number -1) \
-                and to_row == from_row + direction) and chess_board.get(to_coordinates) != None:
-            return True
-
-            """if its not black make """
-            return False
+    if ((from_column_number == to_column_number +1 or from_column_number == to_column_number -1) \
+                and to_row == from_row + direction) and chess_board.get(to_coordinates) == None:
+        return False
 
 # """adding things here to validate the last line in test Validate using ands AND ors"""
-        if not (to_row == from_row + direction
-                or ((from_row == 7 or from_row == 2) and to_row == from_row + (direction * 2))):
+    if not (to_row == from_row + direction
+        or ((from_row == 7 or from_row == 2) and to_row == from_row + (direction * 2))):
 
-            #raise ValidationException("Not a standard pawn move")
-            return False
+        raise ValidationException("Not a standard pawn move")
+        return False
+
     return True
 
 def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
-    from_piece_colour = chess_board.get(from_coordinates)[2]
+    # from_piece_colour = chess_board.get(from_coordinates)[2]
     from_row = int(from_coordinates[1])
     to_row = int(to_coordinates[1])
     if not (from_column_number == to_column_number or from_row == to_row):
@@ -138,53 +139,29 @@ def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_colu
     #     return False
     return True
 
-
-
 class ValidationException(Exception):
     pass
 
+def _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
+    # bishop = chess_board.get(from_coordinates)[0] == "B"
+    from_row = int(from_coordinates[1])
+    to_row = int(to_coordinates[1])
 
-    # if not from_row == to_row:
-    #
-    #
-    # if not to_column_number == from_column_number:
-    #     return False
+    move = [(to_column_number - from_column_number),(to_row - from_row)]
 
-    # from_column_number = chess_board.get(from_coordinates[0] == int(from_coordinates[0]))
-    # to_column_number = chess_board.get(to_coordinates[0] == int(to_coordinates[0]))
-    #
-    # if not to_coordinates == None \
-    #         and from_column_number == to_column_number or from_coordinates[1] == to_coordinates[1]:
-    #         return False
+    if not abs(move[0]) == abs(move[1]):
+        return False
+    return True
 
-    # from_piece_colour = chess_board.get(from_coordinates)[2]
-    # if from_piece_colour == "B":
-    #     direction = range(1,8)
-    # else:
-    #     direction = range(1,8)
-    #
-    # from_row = int(from_coordinates[1])
-    # to_row = int(to_coordinates[1])
-    #
-    # if chess_board.get(to_coordinates)is None:
-    #     if not from_column_number == to_column_number:
-    #         return False
-    #
-    #     if not to_row == from_row + direction:
-    #         return False
+# def _validate_knight_move(chess_board, from_coordiantes, to_coordiantes, from_column_number, to_column_number):
 
-# def _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
-#     bishop = chess_board.get(from_coordinates)[0] == "B"
-#     from_row = int(from_coordinates[1])
-#     to_row = int(to_coordinates[1])
-#
-#     if bishop and to_row +
-#     b_squares = bishop +
-#     if bishop_b == "B":
-#         direction = -1
-#     else:
-#         direction = +1
+def _validate_queen_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
+    from_coordiantes = chess_board.get(from_coordinates)
+    to_coordiantes = chess_board.get(to_coordinates)
 
-# def _validate_Knight_move(chess_board, from_coordiantes, to_coordiantes, from_column_number, to_column_number):
+    if not _validate_rook_move(chess_board, from_coordiantes, to_coordiantes, from_column_number, to_column_number)\
+        or _validate_bishop_move(chess_board, from_coordiantes, to_coordiantes, from_column_number, to_column_number):
 
-# white moves first -
+        return False
+    return True
+    # if not _validate_rook_move(che)

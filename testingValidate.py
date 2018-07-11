@@ -13,7 +13,8 @@ if __name__ == "__main__":
                    "A8": "C_B",
                    "A6": "C_B",
                    "B6": "C_W",
-                   "A7": "P_W"}
+                   "A7": "P_W",
+                   "D1": "Q_W"}
 
     print("====" * 30+"Special move")
     print("Validate en_passant A2 to A4 is False", specialMove.special_move(chess_board,"A2","A4"))
@@ -58,13 +59,27 @@ if __name__ == "__main__":
 
 
     print("====" * 30)
+
+    chess_board = {"A2": "P_W",
+                   "B4": "P_B",
+                   "H7": "P_B",
+                   "G5": "P_W",
+                   "C3": "K_W",
+                   "F8": "K_B",
+                   "C7": "P_B",
+                   "A8": "C_B",
+                   "A6": "C_B",
+                   "B6": "C_W",
+                   "A7": "P_W",
+                   "D1": "Q_W"}
+
     print("True validate move pawn A2 to A3", validate.validate_move(chess_board, "A2", "A3"))
     print("False validate move pawn A2 to A7", validate.validate_move(chess_board, "A2", "A7"))
-    print("True validate move king A2 to A4", validate.validate_move(chess_board, "A2", "A4"))
+    print("True validate move pawn A2 to A4", validate.validate_move(chess_board, "A2", "A4"))
     #print("True validate move king A7 to A6", validate.validate_move(chess_board, "A7", "A6"))
-    print("False validate move king A2 to A1", validate.validate_move(chess_board, "A2", "A1"))
-    print("True validate move king C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
-    print("True validate move king C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
+    print("False validate move pawn A2 to A1", validate.validate_move(chess_board, "A2", "A1"))
+    print("True validate move pawn C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
+    print("True validate move pawn C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
 
     print("_validate_rock_move A8 to B3 False", validate._validate_rook_move(chess_board, "A8", "B3", 0, 1))
     print("_validate_rock_move A8 to A3 True", validate._validate_rook_move(chess_board, "A8", "A3", 0, 0))
@@ -88,3 +103,9 @@ if __name__ == "__main__":
     # print("Validate A8 to B5 is False", validate._validate_rock_move(chess_board, "A8", "B5"))
     print("==== " * 30)
     print("Validate SPECAIL MOVE BLACK! G5 to H6 is True", specialMove.special_move(chess_board, "G5", "H6"))
+    print("==== " * 30)
+    print("_validate_bishop_move C1 to A3", validate.validate_move(chess_board, "C1", "A3"))
+
+    # print("==== " * 30)
+    # print("_validate_queen_move D1 to D3", validate.validate_move(chess_board, "D1", "D3"))
+    # print("_validate_queen_move D3 to F6", validate.validate_move(chess_board, "D3", "F6", 3, 5))
