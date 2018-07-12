@@ -156,11 +156,11 @@ def _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_co
 # def _validate_knight_move(chess_board, from_coordiantes, to_coordiantes, from_column_number, to_column_number):
 
 def _validate_queen_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
-    from_coordiantes = chess_board.get(from_coordinates)
-    to_coordiantes = chess_board.get(to_coordinates)
+    # from_coordiantes = chess_board.get(from_coordinates)
+    # to_coordiantes = chess_board.get(to_coordinates)
 
-    if not _validate_rook_move(chess_board, from_coordiantes, to_coordiantes, from_column_number, to_column_number)\
-        or _validate_bishop_move(chess_board, from_coordiantes, to_coordiantes, from_column_number, to_column_number):
+    if not _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number)\
+        or _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
 
         return False
     return True
