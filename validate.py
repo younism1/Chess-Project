@@ -34,11 +34,16 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
     elif from_piece[0] == "Q":
         return _validate_queen_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
 
+    elif from_piece[0] == "H":
+        return _validate_knight_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
+
     return True
 """add the validation for cooridantes and make sure it runs without a pass, test below"""
 def _validate_coordinate(coordinate):
 
-    #a = 10/0
+    if not len(coordinate[0]) == 2:
+        raise ValidationException ("make sure you enter a 2 character coordinate")
+
     if not coordinate[0] in "ABCDEFGH":
         print("not valid column")
         return False
@@ -93,7 +98,7 @@ def _validate_pawn_move(chess_board, from_coordinates, to_coordinates, from_colu
         or ((from_row == 7 or from_row == 2) and to_row == from_row + (direction * 2))):
 
         raise ValidationException("Not a standard pawn move")
-        return False
+
 
     return True
 
@@ -139,9 +144,6 @@ def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_colu
     #     return False
     return True
 
-class ValidationException(Exception):
-    pass
-
 def _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
     # bishop = chess_board.get(from_coordinates)[0] == "B"
     from_row = int(from_coordinates[1])
@@ -153,15 +155,26 @@ def _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_co
         return False
     return True
 
-# def _validate_knight_move(chess_board, from_coordiantes, to_coordiantes, from_column_number, to_column_number):
+def _validate_knight_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
+    from_row = int(from_coordinates[1])
+    to_row = int(to_coordinates[1])
+
+    move = [abs(to_column_number - from_column_number), abs(to_row - from_row)]
+
+    if move[0] == 1 and move[1] == 2 or move[0] == 2 and move[1] == 1:
+        return True
+
+    return False
 
 def _validate_queen_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
     # from_coordiantes = chess_board.get(from_coordinates)
     # to_coordiantes = chess_board.get(to_coordinates)
 
-    if not _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number)\
-        or _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
+    return _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number)\
+        or _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number)
 
-        return False
-    return True
+
     # if not _validate_rook_move(che)
+
+class ValidationException(Exception):
+    pass

@@ -1,5 +1,4 @@
 from validate import validate_move, ValidationException
-import traceback as tb
 import undo_moves
 from specialMove import special_move
 
@@ -92,8 +91,8 @@ def validate_and_move_piece(from_coordiantes, to_coordinates):
         #if it's valid move the piece
 
     except ValidationException as e:
-        tb.print_exc()
         print(e)
+
 
 generate_board()
 print_board()

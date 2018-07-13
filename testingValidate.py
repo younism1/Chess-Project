@@ -79,7 +79,7 @@ if __name__ == "__main__":
     #print("True validate move king A7 to A6", validate.validate_move(chess_board, "A7", "A6"))
     print("False validate move pawn A2 to A1", validate.validate_move(chess_board, "A2", "A1"))
     print("True validate move pawn C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
-    print("True validate move pawn C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
+    print("True validate move king C7 to C5", validate.validate_move(chess_board, "C7", "C5"))
 
     print("_validate_rock_move A8 to B3 False", validate._validate_rook_move(chess_board, "A8", "B3", 0, 1))
     print("_validate_rock_move A8 to A3 True", validate._validate_rook_move(chess_board, "A8", "A3", 0, 0))
