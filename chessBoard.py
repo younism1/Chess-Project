@@ -1,5 +1,6 @@
 from validate import validate_move, ValidationException
 import undo_moves
+import traceback as tb
 from specialMove import special_move
 
 #Generates the board and populate it with pieces.
@@ -80,19 +81,21 @@ def move_piece(from_coordinates, to_coordinates):
 def validate_and_move_piece(from_coordiantes, to_coordinates):
     """imports validation at the top and validates """
     #validate
-    try:
-        if special_move(chess_board, from_coordinates, to_coordinates):
-            pass
 
-        elif validate_move(chess_board, from_coordiantes, to_coordinates):
+    if from_coordiantes == None:
+        return  False
+            #     to_coordinates = None:
+            # return False
+
+    if not special_move(chess_board, from_coordinates, to_coordinates):
+        try:
+            validate_move(chess_board, from_coordiantes, to_coordinates)
             move_piece(from_coordiantes, to_coordinates)
-        else:
-            print("WHAT ARE YOU DOING?? \n TRY AGAIN! \n FAILED VALIDATION")
-        #if it's valid move the piece
+    # except IndexError("Please enter a coordinate using, once character and one number from the grid")
 
-    except ValidationException as e:
-        print(e)
-
+        except ValidationException as e:
+            tb.print_exc()
+            print(e)
 
 generate_board()
 print_board()

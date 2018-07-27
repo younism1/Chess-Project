@@ -24,7 +24,6 @@ def special_move(chess_board, from_coordinates, to_coordinates):
                 return True
 
 
-
             if chess_board.get(from_coordinates)[0] == "P" and abs(to_row - from_row) == 2:
                 en_passant = from_coordinates[0] + str((to_row + from_row)//2)
 

@@ -16,13 +16,13 @@ if __name__ == "__main__":
                    "A7": "P_W",
                    "D1": "Q_W"}
 
-    print("====" * 30+"Special move")
-    print("Validate en_passant A2 to A4 is False", specialMove.special_move(chess_board,"A2","A4"))
-    print(specialMove.en_passant)
-    chess_board["A4"] = chess_board["A2"]
-    del chess_board["A2"]
-    print("Validate en_passant B4 to A3 is True", specialMove.special_move(chess_board,"B4","A3"))
-    print(chess_board)
+    # print("====" * 30+"Special move")
+    # print("Validate en_passant A2 to A4 is False", specialMove.special_move(chess_board,"A2","A4"))
+    # print(specialMove.en_passant)
+    # chess_board["A4"] = chess_board["A2"]
+    # del chess_board["A2"]
+    # print("Validate en_passant B4 to A3 is True", specialMove.special_move(chess_board,"B4","A3"))
+    # print(chess_board)
 
     print()
     print("Validate en_passant BLACK! H7 to H5 is False", specialMove.special_move(chess_board,"H7","H5"))

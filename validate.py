@@ -1,20 +1,20 @@
 def validate_move(chess_board, from_coordinate, to_coordinate):
     """white piece moves first - can work this out by having """
     if not _validate_coordinate(from_coordinate):
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
 
     if not _validate_coordinate(to_coordinate):
         print("failed at line 6", to_coordinate)
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
 
     from_piece = chess_board.get(from_coordinate)
     if from_piece == None:
         print("Are you blind! there's nothing here")
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
 
     if chess_board.get(to_coordinate) != None:
         if from_piece[2] == chess_board.get(to_coordinate)[2]:
-            raise Exception("Please enter valid coordinates")
+            raise ValidationException("Please enter valid coordinates")
 
     from_column_number = coordinate_to_column_number(from_coordinate)
     to_column_number = coordinate_to_column_number(to_coordinate)
@@ -41,8 +41,8 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
 """add the validation for cooridantes and make sure it runs without a pass, test below"""
 def _validate_coordinate(coordinate):
 
-    if not len(coordinate[0]) == 2:
-        raise Exception ("make sure you enter a 2 character coordinate")
+    if not len(coordinate) == 2:
+        raise ValidationException("make sure you enter a 2 character coordinate")
     if not coordinate[0] in "ABCDEFGH":
         print("not valid column")
         raise Exception("Please enter valid coordinates")
@@ -64,10 +64,10 @@ def _validate_king_move(chess_board, from_coordinates, to_coordinates, from_colu
     to_row = int(to_coordinates[1])
 
     if not (to_row -1 <= from_row <= to_row +1):
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
 
     if not (to_column_number -1 <= from_column_number <= to_column_number +1):
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
 
     return True
 
@@ -84,19 +84,19 @@ def _validate_pawn_move(chess_board, from_coordinates, to_coordinates, from_colu
 
     if chess_board.get(to_coordinates) is None:
         if not from_column_number == to_column_number:
-            raise Exception("Please enter valid coordinates")
+            raise ValidationException("Please enter valid coordinates")
 
             """if to_co-ordinate is diagonally forward from from position"""
         # direction = from_column_number
     if ((from_column_number == to_column_number +1 or from_column_number == to_column_number -1) \
                 and to_row == from_row + direction) and chess_board.get(to_coordinates) == None:
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
 
 # """adding things here to validate the last line in test Validate using ands AND ors"""
     if not (to_row == from_row + direction
         or ((from_row == 7 or from_row == 2) and to_row == from_row + (direction * 2))):
 
-        raise Exception("Not a standard pawn move")
+        raise ValidationException("Not a standard pawn move")
 
 
     return True
@@ -106,7 +106,7 @@ def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_colu
     from_row = int(from_coordinates[1])
     to_row = int(to_coordinates[1])
     if not (from_column_number == to_column_number or from_row == to_row):
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
 
     if not from_row == to_row:
         if from_row >= to_row:
@@ -117,7 +117,7 @@ def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_colu
         for i in x:
             test_coordiante = from_coordinates[0]+ str(i)
             if chess_board.get(test_coordiante) != None:
-                raise Exception("Please enter valid coordinates")
+                raise ValidationException("Please enter valid coordinates")
 
     else:
         if from_column_number >= to_column_number:
@@ -128,7 +128,7 @@ def _validate_rook_move(chess_board, from_coordinates, to_coordinates, from_colu
         for i in y:
             test_coordiante = "ABCDEFGH"[i] + from_coordinates[1]
             if chess_board.get(test_coordiante) != None:
-                raise Exception("Please enter valid coordinates")
+                raise ValidationException("Please enter valid coordinates")
 
     # print("x",x)
     # y = range(from_column_number, to_column_number)
@@ -151,7 +151,7 @@ def _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_co
     move = [(to_column_number - from_column_number),(to_row - from_row)]
 
     if not abs(move[0]) == abs(move[1]):
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
     return True
 
 def _validate_knight_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
@@ -160,10 +160,9 @@ def _validate_knight_move(chess_board, from_coordinates, to_coordinates, from_co
 
     move = [abs(to_column_number - from_column_number), abs(to_row - from_row)]
 
-    if move[0] == 1 and move[1] == 2 or move[0] == 2 and move[1] == 1:
-        return True
-
-    return False
+    if not (move[0] == 1 and move[1] == 2 or move[0] == 2 and move[1] == 1):
+        raise ValidationException("Please enter valid coordinates")
+    return True
 
 def _validate_queen_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):
     # from_coordiantes = chess_board.get(from_coordinates)
