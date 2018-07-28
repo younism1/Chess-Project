@@ -1,5 +1,5 @@
 from validate import validate_move, ValidationException
-import undo_moves
+import undoMoves
 import traceback as tb
 from specialMove import special_move
 
@@ -64,7 +64,7 @@ def process_command(command_input):
         quit()
 
     if command_input == "UNDO":
-        undo_moves.undo_last_move(chess_board)
+        undoMoves.undo_last_move(chess_board)
         return False
     return True
 
@@ -75,7 +75,7 @@ def move_piece(from_coordinates, to_coordinates):
     chess_board[to_coordinates] = chess_board[from_coordinates]
     print(chess_board[from_coordinates])
     del chess_board[from_coordinates]
-    undo_moves.store_move(from_coordinates, to_coordinates, piece)
+    undoMoves.store_move(from_coordinates, to_coordinates, piece)
 
 #imports validation at the top and validates
 def validate_and_move_piece(from_coordiantes, to_coordinates):

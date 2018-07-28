@@ -1,6 +1,6 @@
 import validate
 import specialMove
-import undo_moves
+import undoMoves
 
 if __name__ == "__main__":
     chess_board = {"A2": "P_W",
@@ -32,10 +32,10 @@ if __name__ == "__main__":
     print("Validate en_passant BLACK! G5 to H6 is True", specialMove.special_move(chess_board,"G5","H6"))
     print(chess_board)
     print("====" * 30)
-    print(undo_moves.undo_moves)
-    undo_moves.undo_last_move(chess_board)
+    print(undoMoves.undo_moves)
+    undoMoves.undo_last_move(chess_board)
     print(chess_board)
-    print(undo_moves.undo_moves)
+    print(undoMoves.undo_moves)
 
     print("====" * 30)
 

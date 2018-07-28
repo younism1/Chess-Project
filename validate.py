@@ -38,7 +38,7 @@ def validate_move(chess_board, from_coordinate, to_coordinate):
         return _validate_knight_move(chess_board, from_coordinate, to_coordinate, from_column_number, to_column_number)
 
     return True
-"""add the validation for cooridantes and make sure it runs without a pass, test below"""
+
 def _validate_coordinate(coordinate):
 
     if not len(coordinate) == 2:

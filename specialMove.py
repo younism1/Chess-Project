@@ -1,4 +1,4 @@
-import undo_moves
+import undoMoves
 
 en_passant = None
 
@@ -16,8 +16,8 @@ def special_move(chess_board, from_coordinates, to_coordinates):
 
                 en_passant_captured = to_coordinates[0] + from_coordinates[1]
 
-                undo_moves.store_multi_move(from_coordinates, to_coordinates, None, None,
-                                            en_passant_captured, chess_board[en_passant_captured])
+                undoMoves.store_multi_move(from_coordinates, to_coordinates, None, None,
+                                           en_passant_captured, chess_board[en_passant_captured])
 
                 del chess_board[en_passant_captured]
 
