@@ -1,7 +1,7 @@
 from validate import validate_move, ValidationException
 import undoMoves
 import traceback as tb
-from specialMove import special_move
+import specialMove
 
 #Generates the board and populate it with pieces.
 def generate_board():
@@ -67,7 +67,6 @@ def process_command(command_input):
         undoMoves.undo_last_move(chess_board)
         return False
     return True
-
 #taking from coordiantes and moving piece to the to cooridantes
 def move_piece(from_coordinates, to_coordinates):
     global chess_board
@@ -76,7 +75,6 @@ def move_piece(from_coordinates, to_coordinates):
     print(chess_board[from_coordinates])
     del chess_board[from_coordinates]
     undoMoves.store_move(from_coordinates, to_coordinates, piece)
-
 #imports validation at the top and validates
 def validate_and_move_piece(from_coordiantes, to_coordinates):
     """imports validation at the top and validates """
@@ -87,7 +85,7 @@ def validate_and_move_piece(from_coordiantes, to_coordinates):
             #     to_coordinates = None:
             # return False
 
-    if not special_move(chess_board, from_coordinates, to_coordinates):
+    if not special_move_manager.check_and_move(from_coordinates, to_coordinates):
         try:
             validate_move(chess_board, from_coordiantes, to_coordinates)
             move_piece(from_coordiantes, to_coordinates)
@@ -98,6 +96,8 @@ def validate_and_move_piece(from_coordiantes, to_coordinates):
             print(e)
 
 generate_board()
+special_move_manager = specialMove.SpecialMoveManager(chess_board)
+
 print_board()
 
 while True:

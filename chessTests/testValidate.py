@@ -1,6 +1,9 @@
 import unittest
 import validate
 
+"""complete unite test for Friday and make sure I understand it"""
+""" show phil a good understanding of how i've converted the TestValidate to Unite test and got everything working"""
+
 class TestValidation(unittest.TestCase):
 
     def setUp(self):
