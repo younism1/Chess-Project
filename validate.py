@@ -45,12 +45,12 @@ def _validate_coordinate(coordinate):
         raise ValidationException("make sure you enter a 2 character coordinate")
     if not coordinate[0] in "ABCDEFGH":
         print("not valid column")
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
     if not coordinate[1] in "12345678":
         print("not valid row")
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
     if len(coordinate) != 2:
-        raise Exception("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates")
     return True
 
 def coordinate_to_column_number(coordinate):

@@ -18,20 +18,27 @@ class TestValidation(unittest.TestCase):
                        "A6": "C_B",
                        "B6": "C_W",
                        "A7": "P_W",
-                       "D1": "Q_W"}
+                       "D1": "Q_W",
+                        "E1": "P_W"}
 
     # def tearDown(self):
     #     print("Fin a test")
 
     def testValidate_move(self):
+        validate.validate_move(self.chess_board, "A2", "A3")
+        validate.validate_move(self.chess_board, "C3", "D4")
+
+        """needs fix test in validate.py, """
+        with self.assertRaises(validate.ValidationException):
+            validate.validate_move(self.chess_board, "H9", "cheese")
 
         with self.assertRaises(validate.ValidationException):
-
-            validate.validate_move(self.chess_board, "A2", "A3")
-            validate.validate_move(self.chess_board, "H9", "cheese")
             validate.validate_move(self.chess_board, "E1", "E3")
-            validate.validate_move(self.chess_board, "C3", "D4")
+
+        with self.assertRaises(validate.ValidationException):
             validate.validate_move(self.chess_board, "C3", "D7")
+
+        with self.assertRaises(validate.ValidationException):
             validate.validate_move(self.chess_board, "C3", "H3")
 
     def testCoordinate_to_column_number(self):
@@ -70,24 +77,29 @@ class TestValidation(unittest.TestCase):
         # self.assertEqual(True, validate.validate_move(self.chess_board, "D1", "D2"))
         # self.assertEqual(True,True)
         # with self.assertRaises(validate.ValidationException):
-        validate.validate_move(self.chess_board, "D1", "D2")
-        with self.assertRaises(validate.ValidationException):
-            validate.validate_move(self.chess_board, "D1", "D3")
+            validate.validate_move(self.chess_board, "D1", "D2")
+            # with self.assertRaises(validate.ValidationException):
+            #
+            #      validate.validate_move(self.chess_board, "D1", "D3")
 
     def testKingMove(self):
 
         # pass
         #self.assertEqual(True, False)
-        #self.assertEqual(True, False)
+        # self.assertEqual(True, False)
+        validate.validate_move(self.chess_board, "D1", "D3")
 
         with self.assertRaises(validate.ValidationException):
-            validate.validate_move(self.chess_board, "D1", "D3")
+
+            validate.validate_move(self.chess_board, "C3", "D4")
+            validate.validate_move(self.chess_board, "C3", "D7")
+            validate.validate_move(self.chess_board, "C3", "H3")
 
     def testRookMove(self):
 
         with self.assertRaises(validate.ValidationException):
             validate._validate_rook_move(self.chess_board, "A8", "B3", 0, 1)
-            validate._validate_rook_move(self.chess_board, "A8", "A3", 0, 0)
+            validate._validate_rook_move(self.chess_board, "A8", "A3", 0, 0 )
             validate._validate_rook_move(self.chess_board, "A8", "C8", 0, 2)
             validate._validate_rook_move(self.chess_board, "A8", "A5", 0, 0)
             validate._validate_rook_move(self.chess_board, "A6", "E6", 0, 4)
