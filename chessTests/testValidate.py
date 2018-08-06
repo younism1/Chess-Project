@@ -8,18 +8,19 @@ class TestValidation(unittest.TestCase):
 
     def setUp(self):
         self.chess_board = {"A2": "P_W",
-                       "B4": "P_B",
-                       "H7": "P_B",
-                       "G5": "P_W",
-                       "C3": "K_W",
-                       "F8": "K_B",
-                       "C7": "P_B",
-                       "A8": "C_B",
-                       "A6": "C_B",
-                       "B6": "C_W",
-                       "A7": "P_W",
-                       "D1": "Q_W",
-                        "E1": "P_W"}
+                            "B4": "P_B",
+                            "H7": "P_B",
+                            "G5": "P_W",
+                            "C3": "K_W",
+                            "F8": "K_B",
+                            "C7": "P_B",
+                            "A8": "C_B",
+                            "A6": "C_B",
+                            "B6": "C_W",
+                            "A7": "P_W",
+                            "D1": "Q_W",
+                            "E1": "P_W",
+                            "H4": "B_W"}
 
     # def tearDown(self):
     #     print("Fin a test")
@@ -117,8 +118,10 @@ class TestValidation(unittest.TestCase):
 
     def testBishopMove(self):
 
+        validate.validate_move(self.chess_board, "H4", "F6")
+        # validate.validate_move(self.chess_board, "H4", "F5")
         with self.assertRaises(validate.ValidationException):
-            validate.validate_move(self.chess_board, "C1", "A3")
+            validate.validate_move(self.chess_board, "H4", "F5")
 
 if __name__ == "__main__":
     unittest.main()
