@@ -97,6 +97,7 @@ def validate_and_move_piece(from_coordiantes, to_coordinates):
 
 generate_board()
 special_move_manager = specialMove.SpecialMoveManager(chess_board)
+special_move_manager = specialMove.SpecialMoveManager(chess_board)
 
 print_board()
 

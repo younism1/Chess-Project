@@ -151,7 +151,8 @@ def _validate_bishop_move(chess_board, from_coordinates, to_coordinates, from_co
     move = [(to_column_number - from_column_number),(to_row - from_row)]
 
     if not abs(move[0]) == abs(move[1]):
-        raise ValidationException("Please enter valid coordinates")
+        raise ValidationException("Please enter valid coordinates.3")
+
     return True
 
 def _validate_knight_move(chess_board, from_coordinates, to_coordinates, from_column_number, to_column_number):

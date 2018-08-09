@@ -20,7 +20,8 @@ class TestValidation(unittest.TestCase):
                             "A7": "P_W",
                             "D1": "Q_W",
                             "E1": "P_W",
-                            "H4": "B_W"}
+                            "H4": "B_W",
+                            "B1": "H_W"}
 
     # def tearDown(self):
     #     print("Fin a test")
@@ -112,16 +113,17 @@ class TestValidation(unittest.TestCase):
             validate.validate_move(self.chess_board, "A6", "E6")
 
     def testKnightMove(self):
-
-        #with self.assertRaises(validate.ValidationException):
-            pass
+        validate.validate_move(self.chess_board, "B1", "D2")
+        with self.assertRaises(validate.ValidationException):
+            validate.validate_move(self.chess_board, "B1", "C3")
 
     def testBishopMove(self):
 
+        validate.validate_move(self.chess_board, "H4", "F2")
         validate.validate_move(self.chess_board, "H4", "F6")
-        # validate.validate_move(self.chess_board, "H4", "F5")
+
         with self.assertRaises(validate.ValidationException):
-            validate.validate_move(self.chess_board, "H4", "F5")
+            validate.validate_move(self.chess_board, "H4", "E6")
 
 if __name__ == "__main__":
     unittest.main()
